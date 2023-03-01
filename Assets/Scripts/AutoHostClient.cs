@@ -9,7 +9,7 @@ namespace MirrorBasics {
         [SerializeField] NetworkManager networkManager;
 
         void Start () {
-            if (!Application.isBatchMode) { //Headless build
+            if (!Application.isBatchMode) { 
                 Debug.Log ($"=== Client Build ===");
                 networkManager.StartClient ();
             } else {
