@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using UnityEngine.SceneManagement;
+using System;
 
 public class PlayerBox : NetworkBehaviour
 {
@@ -23,6 +24,8 @@ public class PlayerBox : NetworkBehaviour
         {
             MainMenu.instance.SpawnPlayerUIPrefab(this);
         }
+
+        DontDestroyOnLoad(this);
     }
 
     public void HostGame()
@@ -109,13 +112,13 @@ public class PlayerBox : NetworkBehaviour
         Debug.Log($"ID {matchID} | Start");
         DontDestroyOnLoad(gameObject);
         MainMenu.instance.inGame = true;
-        transform.localScale = new Vector3(1, 1, 1); 
-        SceneManager.LoadScene("Game", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("Game");
     }
 
+    [Obsolete]
     void Update()
     {
-        if (hasAuthority)
+        if (isLocalPlayer)
         {
             float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");

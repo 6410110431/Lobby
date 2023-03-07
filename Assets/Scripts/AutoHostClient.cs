@@ -1,25 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Mirror;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace MirrorBasics {
     public class AutoHostClient : MonoBehaviour {
 
-        [SerializeField] NetworkManager networkManager;
-
         void Start () {
             if (!Application.isBatchMode) { 
                 Debug.Log ($"=== Client Build ===");
-                networkManager.StartClient ();
+                NetworkManager.singleton.StartClient ();
             } else {
                 Debug.Log ($"=== Server Build ===");
+                NetworkManager.singleton.StartServer();
             }
         }
 
         public void JoinLocal () {
-            networkManager.networkAddress = "localhost";
-            networkManager.StartClient ();
+            NetworkManager.singleton.StartClient ();
         }
 
     }

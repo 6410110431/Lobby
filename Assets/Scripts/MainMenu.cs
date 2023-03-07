@@ -51,7 +51,16 @@ public class MainMenu : NetworkBehaviour
 
             for (int i = 0; i < players.Length; i++)
             {
-                players[i].gameObject.transform.localScale = Vector3.zero;
+                players[i].gameObject.transform.position = Vector3.zero;
+            }
+        }
+        else
+        {
+            PlayerBox[] players = FindObjectsOfType<PlayerBox>();
+
+            for (int i = 0; i < players.Length; i++)
+            {
+                players[i].gameObject.transform.localScale = new Vector3(1,1,1);
             }
         }
     }
